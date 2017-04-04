@@ -1,0 +1,18 @@
+@mixin rootsize() {
+  font-size: calc-root-size( get-rootsize(xs) );
+
+  @for $i from 2 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+      // если значений $rootsizes меньше, чем значений $breakpoints
+      @if $i > $rootsizes-length {
+        line-height: calc-root-size( nth($sizes, $rootsizes-length) );
+
+      // если значений $rootsizes и $breakpoints одинаковое количество
+      } @else {
+        font-size: calc-root-size( nth($sizes, $i) );
+      }
+    }
+  }
+}
