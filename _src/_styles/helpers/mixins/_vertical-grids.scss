@@ -1,0 +1,91 @@
+@mixin grid() {
+  $line-height: line-height(xs);
+  $font-base: map-deep-get($modular-scale, xs, zeta);
+  $leading: round($font-base * $line-height);
+
+  background-image: linear-gradient(to bottom, $grid-line-bg 1px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: 100% px($leading);
+
+  @for $i from 2 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line-heights-length {
+        $line-height: nth($line-height-values, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+        $leading: round($font-base * $line-height);
+
+        background-size: 100% px($leading);
+
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line-height: nth($line-height-values, $i);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $i), zeta);
+        $leading: round($font-base * $line-height);
+
+        background-size: 100% px($leading);
+      }
+    }
+  }
+}
+
+@mixin double-grid() {
+  $line-height: line-height(xs);
+  $font-base: map-deep-get($modular-scale, xs, zeta);
+  $leading: round($font-base * $line-height);
+
+  background-image: linear-gradient(
+    to bottom,
+    $grid-line-bg 1px, transparent 0,
+    transparent px(0.5 * $leading),
+    $grid-line-bg px(0.5 * $leading),
+    transparent px(0.5 * $leading + 1),
+    transparent px($leading));
+
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: 100% px($leading);
+
+  @for $i from 2 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line-heights-length {
+        $line-height: nth($line-height-values, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+        $leading: round($font-base * $line-height);
+
+       background-image: linear-gradient(
+         to bottom,
+         $grid-line-bg 1px, transparent 0,
+         transparent px(0.5 * $leading),
+         $grid-line-bg px(0.5 * $leading),
+         transparent px(0.5 * $leading + 1),
+         transparent px($leading));
+
+        background-size: 100% px($leading);
+
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line-height: nth($line-height-values, $i);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $i), zeta);
+        $leading: round($font-base * $line-height);
+
+        background-image: linear-gradient(
+          to bottom,
+          $grid-line-bg 1px, transparent 0,
+          transparent px(0.5 * $leading),
+          $grid-line-bg px(0.5 * $leading),
+          transparent px(0.5 * $leading + 1),
+          transparent px($leading));
+        background-size: 100% px($leading);
+      }
+    }
+  }
+}
