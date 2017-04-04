@@ -15,7 +15,7 @@ $font-root: 100% !default;
 /// @param {Number} $base [null] - The base value to use when calculating the `rem`. If you're using Foundation out of the box, this is 16px. If this parameter is `null`, the function will reference the `$base-font-size` variable as the base.
 ///
 /// @returns {List} A list of converted values.
-@function rem($values, $base: null) {
+@function to-rem($values, $base: null) {
   $rem-values: ();
   $count: length($values);
 
@@ -50,7 +50,7 @@ $font-root: 100% !default;
 @function convert-to-em($value) {
   // Pixel and unitless values are converted to rems
   @if unit($value) == 'px' or unitless($value) {
-    $value: rem($value, $base: 16px);
+    $value: to-rem($value, $base: 16px);
   }
 
   // Then the value is converted to ems
