@@ -1,3 +1,14 @@
+@mixin double-grid-gradient($leading, $color) {
+  background-image: linear-gradient(
+    to bottom,
+    $color 1px, transparent 0,
+    transparent px(0.5 * $leading),
+    $color px(0.5 * $leading),
+    transparent px(0.5 * $leading + 1),
+    transparent px($leading));
+}
+
+
 @mixin grid() {
   $line-height: line-height(xs);
   $font-base: map-deep-get($modular-scale, xs, zeta);
@@ -38,14 +49,8 @@
   $font-base: map-deep-get($modular-scale, xs, zeta);
   $leading: round($font-base * $line-height);
 
-  background-image: linear-gradient(
-    to bottom,
-    $grid-line-bg 1px, transparent 0,
-    transparent px(0.5 * $leading),
-    $grid-line-bg px(0.5 * $leading),
-    transparent px(0.5 * $leading + 1),
-    transparent px($leading));
 
+  @include double-grid-gradient($leading, $grid-line-bg);
   background-position: left top;
   background-repeat: repeat;
   background-size: 100% px($leading);
@@ -61,14 +66,7 @@
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
         $leading: round($font-base * $line-height);
 
-       background-image: linear-gradient(
-         to bottom,
-         $grid-line-bg 1px, transparent 0,
-         transparent px(0.5 * $leading),
-         $grid-line-bg px(0.5 * $leading),
-         transparent px(0.5 * $leading + 1),
-         transparent px($leading));
-
+        @include double-grid-gradient($leading, $grid-line-bg);
         background-size: 100% px($leading);
 
       // если значений $line-height и $breakpoints одинаковое количество
@@ -77,13 +75,7 @@
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $i), zeta);
         $leading: round($font-base * $line-height);
 
-        background-image: linear-gradient(
-          to bottom,
-          $grid-line-bg 1px, transparent 0,
-          transparent px(0.5 * $leading),
-          $grid-line-bg px(0.5 * $leading),
-          transparent px(0.5 * $leading + 1),
-          transparent px($leading));
+        @include double-grid-gradient($leading, $grid-line-bg);
         background-size: 100% px($leading);
       }
     }
