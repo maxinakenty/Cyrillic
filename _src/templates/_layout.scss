@@ -21,6 +21,9 @@ body {
 
 .container {
   @include container(gap);
-  background-color: lightblue;
   min-height: 700px;
+}
+
+.double-grid {
+  @include double-grid();
 }
