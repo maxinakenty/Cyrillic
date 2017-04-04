@@ -25,7 +25,3 @@ body {
 .container {
   @include container(gap);
 }
-
-.double-grid {
-  @include double-grid();
-}
