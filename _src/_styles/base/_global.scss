@@ -39,3 +39,13 @@ button {
 select {
   border-radius: 0;
 }
+
+// VERTICAL GRIDS
+
+.grid {
+  @include grid();
+}
+
+.double-grid {
+  @include double-grid();
+}
