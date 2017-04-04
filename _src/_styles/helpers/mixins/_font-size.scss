@@ -1,0 +1,60 @@
+//MIXINS
+
+
+@mixin fontsize-val($font-size, $breakpoint) {
+  $breakpoint-value: type-of($breakpoint);
+
+  @if $breakpoint-value == string {
+    @include up($breakpoint) {
+      $font-size-val: get-string-or-number($font-size, $breakpoint);
+      $root-size: get-rootsize($breakpoint);
+      font-size: calc-font-size($font-size-val, $root-size)
+    }
+  } @else {
+      $width: ( nth($points, $breakpoint));
+
+      @include up($width) {
+        $root-size: nth($sizes, $breakpoint);
+        font-size: calc-font-size($font-size, $root-size)
+      }
+  }
+}
+
+
+@mixin font-size($font-size, $breakpoint: xs) {
+  $font-value: type-of($font-size);
+
+  @if $font-value == number and $breakpoint != all {
+    $point: get-breakpoint($breakpoint);
+
+    @if $point {
+      @include fontsize-val($font-size, $breakpoint)
+    }
+
+  } @else if $font-value == string and $breakpoint != all {
+      $point: get-breakpoint($breakpoint);
+      $is-in-scale: is-in-scale($font-size);
+
+      @if $point and $is-in-scale {
+        @include fontsize-val($font-size, $breakpoint);
+      }
+
+  } @else if $font-value == number and $breakpoint == all {
+      @include fontsize-val($font-size, xs);
+
+      @for $i from 2 through $breakpoints-length {
+        @include fontsize-val($font-size, $i)
+      }
+
+  } @else if $font-value == string and $breakpoint == all {
+
+      @if is-in-scale($font-size) {
+        @include fontsize-val($font-size, xs);
+
+        @for $i from 2 through $breakpoints-length {
+          $key: nth($breakpoints-keys, $i);
+          @include fontsize-val($font-size, $key)
+        }
+    }
+  }
+}
