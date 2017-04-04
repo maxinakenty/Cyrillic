@@ -2,7 +2,6 @@ html {
   @include rootsize();
 }
 
-
 body {
   @include font-size(zeta, all);
   hyphens: auto;
