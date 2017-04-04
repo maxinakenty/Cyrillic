@@ -1,0 +1,8 @@
+@function get-rootsize($key) {
+  @if map-has-key($rootsizes, $key) {
+    @return map-get($rootsizes, $key);
+  }
+
+  @warn "#{$key} is not a set $rootsize variable";
+  @return null;
+}
