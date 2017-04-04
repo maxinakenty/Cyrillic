@@ -60,6 +60,6 @@ $modular-scale: (
     theta:   15.6,
     iota:    12.5
   )
-);
+) !default;
 
 $scale-keys: map-keys($modular-scale);
