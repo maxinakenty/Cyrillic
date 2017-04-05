@@ -10,8 +10,8 @@
         $root-size: nth($sizes, $i);
         $margin: $number * $leading;
 
-       width: #{$margin / $root-size}rem;
-       height: #{$margin / $root-size}rem;
+       width: rem($margin, $root-size);
+       height: rem($margin, $root-size);
       }@else {
         $line-height: nth($line-heights-values, $i);
         $root-size: nth($sizes, $i);
@@ -20,8 +20,8 @@
         $leading: round($font-base * $line-height);
         $margin: $number * $leading;
 
-        width: #{$margin / $root-size}rem;
-        height: #{$margin / $root-size}rem;
+        width: rem($margin, $root-size);
+        height: rem($margin, $root-size);
       }
     }
   }
