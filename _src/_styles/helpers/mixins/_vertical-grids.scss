@@ -26,7 +26,7 @@
 
       // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line-heights-length {
-        $line-height: nth($line-height-values, $line-heights-length);
+        $line-height: nth($line-heights-values, $line-heights-length);
 
         // ограничиваем длину $modular-scale до  длины $line-heights
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
@@ -64,7 +64,7 @@
 
       // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line-heights-length {
-        $line-height: nth($line-height-values, $line-heights-length);
+        $line-height: nth($line-heights-values, $line-heights-length);
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
         $leading: round($font-base * $line-height);
 
