@@ -1,5 +1,0 @@
-@function get-string-or-number($font-size, $breakpoint) {
-  $typof-font-size: type-of($font-size);
-
-  @return if($typof-font-size == string, map-deep-get($modular-scale, $breakpoint, $font-size), $font-size);
-}
