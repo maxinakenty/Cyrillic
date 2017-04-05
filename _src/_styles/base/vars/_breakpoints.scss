@@ -1,9 +1,9 @@
 $breakpoints: (
-  xs: 0,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200
+  xs: 0,    // 0px       Mobile first
+  sm: 640,    // 640px   ~ Small tablet up
+  md: 800,    // 800px   ~ Large tablet up
+  lg: 1024,   // 1024px  ~ Desktop up
+  xl: 1600    // 1600px  ~ Large desktop up
 ) !default;
 
 $breakpoints-length: length($breakpoints) !default;
