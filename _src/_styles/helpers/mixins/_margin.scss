@@ -1,0 +1,93 @@
+@mixin margin-bottom($number) {
+  @for $i from 1 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+      @if $i > $line-heights-length {
+        $line-height: nth($line-heights-values, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+        $leading: round($font-base * $line-height);
+        $root-size: nth($sizes, $i);
+        $module: $number * $leading;
+
+        margin-bottom: rem($module, $root-size);
+      }@else {
+        $line-height: nth($line-heights-values, $i);
+        $root-size: nth($sizes, $i);
+        $scale-key: nth($breakpoints-keys, $i);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+        $module: $number * $leading;
+
+        margin-bottom: rem($module, $root-size);
+      }
+    }
+  }
+}
+
+@mixin margin-top($number) {
+  @for $i from 1 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+      @if $i > $line-heights-length {
+        $line-height: nth($line-heights-values, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+        $leading: round($font-base * $line-height);
+        $root-size: nth($sizes, $i);
+        $module: $number * $leading;
+
+        margin-top: rem($module, $root-size);
+      }@else {
+        $line-height: nth($line-heights-values, $i);
+        $root-size: nth($sizes, $i);
+        $scale-key: nth($breakpoints-keys, $i);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+        $module: $number * $leading;
+
+        margin-top: rem($module, $root-size);
+      }
+    }
+  }
+}
+
+
+@mixin margin($top, $right, $bottom: null, $left: null) {
+  @for $i from 1 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+
+      @if $i > $line-heights-length {
+        $line-height: nth($line-heights-values, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+        $leading: round($font-base * $line-height);
+        $root-size: nth($sizes, $i);
+
+        @if $left == null and $bottom == null {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size);
+        } @else if $left == null or $left == $right {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size);
+        } @else {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size) rem($left * $leading, $root-size);
+        }
+
+      }@else {
+        $line-height: nth($line-heights-values, $i);
+        $root-size: nth($sizes, $i);
+        $scale-key: nth($breakpoints-keys, $i);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+
+        @if $left == null and $bottom == null {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size);
+        } @else if $left == null or $left == $right {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size);
+        } @else {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size) rem($left * $leading, $root-size);
+        }
+      }
+    }
+  }
+}
