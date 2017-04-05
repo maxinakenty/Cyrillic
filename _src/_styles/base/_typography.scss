@@ -2,8 +2,11 @@ html {
   @include rootsize();
 }
 
+
 body {
   @include font-size(zeta, all);
+  font-style: normal;
+  font-weight: 400;
   hyphens: auto;
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
