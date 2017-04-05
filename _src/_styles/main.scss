@@ -6,7 +6,8 @@
 @import './helpers/mixins/mixins';
 
 // VENDOR
-@import 'normalize';
+
+@import './base/reset';
 @import './base/global';
 @import './base/typography';
 
