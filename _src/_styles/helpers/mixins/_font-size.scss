@@ -13,7 +13,7 @@
           font-size: calc-font-size($font-size, $root-size);
         } @else {
           $root-size: get-rootsize($breakpoint);
-          font-size: calc-font-size($font-size, $root-size)
+          font-size: calc-font-size($font-size, $root-size);
         }
       }
     }
