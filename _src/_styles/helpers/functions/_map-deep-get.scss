@@ -5,7 +5,7 @@
   @if $map {
     @return $map;
   } @else {
-      @warn "#{$key} is not a set #{$map} variable";
+      @warn "value is not in map";
       @return null;
   }
 }
