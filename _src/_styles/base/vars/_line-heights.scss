@@ -3,4 +3,5 @@ $line-heights: (
 ) !default;
 
 $line-heights-length: length($line-heights) !default;
-$line-height-values: map-values($line-heights) !default;
+$line-heights-values: map-values($line-heights) !default;
+$line-heights-keys: map-keys($line-heights) !default;
