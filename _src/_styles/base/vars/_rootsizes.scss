@@ -5,6 +5,5 @@ $rootsizes: (
   lg: 17,   // 34px line-height body text
   xl: 19    // 38px line-height body text
 ) !default;
-
 $rootsizes-length: length($rootsizes);
 $sizes: map-values($rootsizes);
