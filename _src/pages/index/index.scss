@@ -6,8 +6,4 @@
   size: 100px;
   @include margin-top(1);
   background-color: gray;
-
-  @include only(lg) {
-    background-color: red;
-  }
 }
