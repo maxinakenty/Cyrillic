@@ -1,5 +1,0 @@
-@function calc-root-size($val) {
-  $result: $val / 16 * 100%;
-
-  @return $result;
-}
