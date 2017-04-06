@@ -1,9 +1,13 @@
 .main {
-  @include min-height(26);
+  // @include min-height(26);
 }
 
 .block {
-  @include size(3);
-  @include margin(1, 1, 2);
+  size: 100px;
+  @include margin-top(1);
   background-color: gray;
+
+  @include only(lg) {
+    background-color: red;
+  }
 }
