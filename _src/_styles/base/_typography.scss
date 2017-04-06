@@ -1,10 +1,10 @@
 html {
-  @include rootsize();
+  font-size: $font-root;
 }
 
 
 body {
-  @include font-size(zeta, all);
+  // @include font-size(zeta, all);
   font-style: normal;
   font-weight: 400;
   hyphens: auto;
