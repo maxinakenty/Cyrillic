@@ -38,7 +38,9 @@
     $line-height: get-line-height($breakpoint);
 
     // if breakpoint-key is in line-heights
-    @if $line-height {
+    $is-in-line-heights: map-get($line-heights, $breakpoint);
+
+    @if $is-in-line-heights {
       @include only($breakpoint) {
         $line-height: get-line-height($breakpoint);
         $root-size: get-rootsize($breakpoint);
