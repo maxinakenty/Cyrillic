@@ -1,0 +1,9 @@
+.main {
+  // @include min-height(26);
+}
+
+.block {
+  size: 100px;
+  @include margin-top(1);
+  background-color: gray;
+}

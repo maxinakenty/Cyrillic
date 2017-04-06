@@ -1,0 +1,5 @@
+@function rem($val, $root-size) {
+  $result: #{$val / $root-size}rem;
+
+  @return   $result;
+}

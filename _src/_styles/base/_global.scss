@@ -1,5 +1,6 @@
 html,
 body {
+  position: relative;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
@@ -41,11 +42,20 @@ select {
 }
 
 // VERTICAL GRIDS
+%grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
 .grid {
+  @extend %grid-overlay;
   @include grid();
 }
 
 .double-grid {
+  @extend %grid-overlay;
   @include double-grid();
 }

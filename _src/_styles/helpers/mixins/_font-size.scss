@@ -1,6 +1,9 @@
+
+// FONT SIZE
 @mixin font-size($font-size, $breakpoint: xs) {
   $font-value: type-of($font-size);
 
+  // if vont-value == number and breakpoint !=all
   @if $font-value == number and $breakpoint != all {
     $point: get-breakpoint($breakpoint);
 
@@ -13,11 +16,11 @@
           font-size: calc-font-size($font-size, $root-size);
         } @else {
           $root-size: get-rootsize($breakpoint);
-          font-size: calc-font-size($font-size, $root-size)
+          font-size: calc-font-size($font-size, $root-size);
         }
       }
     }
-
+    // if vont-value == string and breakpoint !=all
   } @else if $font-value == string and $breakpoint != all {
 
     $point: get-breakpoint($breakpoint);
@@ -38,7 +41,7 @@
         }
       }
     }
-
+    // if vont-value == number and breakpoint == all
   } @else if $font-value == number and $breakpoint == all {
       $root-size: get-rootsize(xs);
       font-size: calc-font-size($font-size, $root-size);
@@ -58,7 +61,7 @@
           }
         }
       }
-
+    // if vont-value == string and breakpoint == all
   } @else if $font-value == string and $breakpoint == all {
 
       @if is-in-scale($font-size) {

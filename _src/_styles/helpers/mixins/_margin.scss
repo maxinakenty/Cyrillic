@@ -1,0 +1,111 @@
+
+// MARGIN TOP
+@mixin margin-top($number, $breakpoint: all) {
+
+  //  if breakpoint == all
+  @if $breakpoint == all {
+
+    @for $i from 1 through $breakpoints-length {
+      $point: nth($breakpoints-keys, $i);
+
+      @include up($point) {
+        // if breakpoints-length > line-heights-length
+        @if $i > $line-heights-length {
+          $line-height: nth($line-heights-values, $line-heights-length);
+          $root-size: nth($sizes, $i);
+          $scale-key: nth($breakpoints-keys, $line-heights-length);
+          $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+          $leading: round($font-base * $line-height);
+          $module: $number * $leading;
+
+          margin-top: rem($module, $root-size);
+
+        // if breakpoints-length < line-heights-length
+        }@else {
+          $line-height: nth($line-heights-values, $i);
+          $root-size: nth($sizes, $i);
+          $scale-key: nth($breakpoints-keys, $i);
+          $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+          $leading: round($font-base * $line-height);
+          $module: $number * $leading;
+
+          margin-top: rem($module, $root-size);
+        }
+      }
+    }
+   // if breakpoint != all
+  }@else {
+    $line-height: get-line-height($breakpoint);
+
+    // if breakpoint-key is in line-heights
+    $is-in-line-heights: map-get($line-heights, $breakpoint);
+
+    @if $is-in-line-heights {
+      @include only($breakpoint) {
+        $line-height: get-line-height($breakpoint);
+        $root-size: get-rootsize($breakpoint);
+        $font-base: map-deep-get($modular-scale, $breakpoint, zeta);
+        $leading: round($font-base * $line-height);
+        $module: $number * $leading;
+
+        margin-top: rem($module, $root-size);
+      }
+
+    // if breakpoint-key is not in line-heights
+    }@else {
+      @include only($breakpoint) {
+        $line-height: nth($line-heights-values, $line-heights-length);
+        $scale-key: nth($scale-keys, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+        $root-size: get-rootsize($breakpoint);
+        $module: $number * $leading;
+
+        margin-top: rem($module, $root-size);
+      }
+    }
+  }
+}
+
+
+
+// @mixin margin($top, $right, $bottom: null, $left: null, $breakpoint: all) {
+//   @for $i from 1 through $breakpoints-length {
+//     $point: nth($breakpoints-keys, $i);
+
+//     @include up($point) {
+
+//       // if breakpoints-length > line-heights-length
+//       @if $i > $line-heights-length {
+//         $line-height: nth($line-heights-values, $line-heights-length);
+//         $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
+//         $leading: round($font-base * $line-height);
+//         $root-size: nth($sizes, $i);
+
+//         @if $left == null and $bottom == null {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size);
+//         } @else if $left == null or $left == $right {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size);
+//         } @else {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size) rem($left * $leading, $root-size);
+//         }
+
+//       // if breakpoints-length < line-heights-length
+//       }@else {
+//         $line-height: nth($line-heights-values, $i);
+//         $root-size: nth($sizes, $i);
+//         $scale-key: nth($breakpoints-keys, $i);
+//         $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+//         $leading: round($font-base * $line-height);
+
+//         @if $left == null and $bottom == null {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size);
+//         } @else if $left == null or $left == $right {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size);
+//         } @else {
+//           margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size) rem($bottom * $leading, $root-size) rem($left * $leading, $root-size);
+//         }
+//       }
+//     }
+//   }
+// }
