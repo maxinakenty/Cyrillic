@@ -1,74 +1,95 @@
-@mixin font-size($font-size, $breakpoint: xs) {
-  $font-value: type-of($font-size);
+// @mixin font-size($font-size, $breakpoint: xs) {
+//   $font-value: type-of($font-size);
 
-  @if $font-value == number and $breakpoint != all {
+//   @if $font-value == number and $breakpoint != all {
 
-    @if get-breakpoint($breakpoint) {
-      @include up($breakpoint) {
-        @if $breakpoints-length > $scale-length and $breakpoints-length > $line-heights-length {
+//     @if get-breakpoint($breakpoint) {
+//       @include up($breakpoint) {
+//         @if $breakpoints-length > $scale-length and $breakpoints-length > $line-heights-length {
 
-          font-size: to-rem($font-size);
-        } @else {
-          font-size: to-rem($font-size);
-        }
+//           font-size: to-rem($font-size);
+//         } @else {
+//           font-size: to-rem($font-size);
+//         }
+//       }
+//     }
+
+//   } @else if $font-value == string and $breakpoint != all {
+
+//     $point: get-breakpoint($breakpoint);
+//     $is-in-scale: is-in-scale($font-size);
+
+//     @if $point and $is-in-scale {
+//       @include up($breakpoint) {
+//         @if $breakpoints-length > $scale-length and $breakpoints-length > $line-heights-length {
+
+//           $scale-key: nth($breakpoints-keys, $scale-length);
+//           $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
+
+//           font-size: to-rem($font-size-val);
+//         } @else {
+//           $font-size-val: map-deep-get($modular-scale, $breakpoint, $font-size);
+
+//           font-size: to-rem($font-size-val);
+//         }
+//       }
+//     }
+
+//   } @else if $font-value == number and $breakpoint == all {
+
+//       @for $i from 1 through $breakpoints-length {
+//         $point: nth($breakpoints-keys, $i);
+
+//         @include up($point) {
+//           font-size: to-rem($font-size);
+//         }
+//       }
+
+//   } @else if $font-value == string and $breakpoint == all {
+
+//       @if is-in-scale($font-size) {
+
+//         @for $i from 1 through $breakpoints-length {
+//           $point: nth($breakpoints-keys, $i);
+
+//           @include up($point) {
+//             @if $i > $scale-length {
+//               $scale-key: nth($breakpoints-keys, $scale-length);
+//               $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
+
+//               font-size: to-rem($font-size-val);
+
+//             }@else {
+//               $scale-key: nth($breakpoints-keys, $i);
+//               $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
+
+//               font-size: to-rem($font-size-val);
+//             }
+//           }
+//         }
+//     }
+//   }
+// }
+
+
+
+@mixin font-size($font-size) {
+  @for $i from 1 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+      @if $i > $scale-length {
+        $scale-key: nth($breakpoints-keys, $scale-length);
+        $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
+
+        font-size: to-rem($font-size-val);
+
+      }@else {
+        $scale-key: nth($breakpoints-keys, $i);
+        $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
+
+        font-size: to-rem($font-size-val);
       }
-    }
-
-  } @else if $font-value == string and $breakpoint != all {
-
-    $point: get-breakpoint($breakpoint);
-    $is-in-scale: is-in-scale($font-size);
-
-    @if $point and $is-in-scale {
-      @include up($breakpoint) {
-        @if $breakpoints-length > $scale-length and $breakpoints-length > $line-heights-length {
-
-          $scale-key: nth($breakpoints-keys, $scale-length);
-          $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
-
-          font-size: to-rem($font-size-val);
-          font-size: px($font-size-val);
-        } @else {
-          $font-size-val: map-deep-get($modular-scale, $breakpoint, $font-size);
-
-          font-size: to-rem($font-size-val);
-          font-size: px($font-size-val);
-        }
-      }
-    }
-
-  } @else if $font-value == number and $breakpoint == all {
-
-      @for $i from 1 through $breakpoints-length {
-        $point: nth($breakpoints-keys, $i);
-
-        @include up($point) {
-          font-size: to-rem($font-size);
-        }
-      }
-
-  } @else if $font-value == string and $breakpoint == all {
-
-      @if is-in-scale($font-size) {
-
-        @for $i from 1 through $breakpoints-length {
-          $point: nth($breakpoints-keys, $i);
-
-          @include up($point) {
-            @if $i > $scale-length {
-              $scale-key: nth($breakpoints-keys, $scale-length);
-              $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
-
-              font-size: to-rem($font-size-val);
-
-            }@else {
-              $scale-key: nth($breakpoints-keys, $i);
-              $font-size-val: map-deep-get($modular-scale, $scale-key, $font-size);
-
-              font-size: to-rem($font-size-val);
-            }
-          }
-        }
     }
   }
 }
