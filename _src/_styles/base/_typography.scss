@@ -25,7 +25,8 @@ h6 {
 
 h1 {
   @include font-size(alpha);
-  @include margin-top(1);
+  @include margin-top();
+  @include line-height();
   @include margin-bottom(0.5);
 }
 
