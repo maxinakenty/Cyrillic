@@ -1,4 +1,4 @@
-@mixin line-height() {
+@mixin line-height($number: 1) {
   @for $i from 1 through $breakpoints-length {
     $point: nth($breakpoints-keys, $i);
 
@@ -11,8 +11,9 @@
         // ограничиваем длину $modular-scale до  длины $line-heights
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $line-heights-length), zeta);
         $module: round($font-base * $line-height);
+        $result: $number * $module;
 
-        line-height: to-rem($module);
+        line-height: to-rem($result);
 
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -20,7 +21,9 @@
         $font-base: map-deep-get($modular-scale, nth($scale-keys, $i), zeta);
         $module: round($font-base * $line-height);
 
-        line-height:to-rem($module);
+        $result: $number * $module;
+
+        line-height: to-rem($result);
       }
     }
   }
