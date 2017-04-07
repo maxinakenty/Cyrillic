@@ -4,7 +4,7 @@ html {
 
 
 body {
-  @include font-base(zeta);
+  @include font-size(zeta);
   @include line-height();
   font-style: normal;
   font-weight: 400;
