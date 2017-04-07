@@ -2,7 +2,6 @@ html {
   font-size: $font-root;
 }
 
-
 body {
   @include font-size(zeta);
   @include line-height();
@@ -12,4 +11,39 @@ body {
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  @include font-size(alpha);
+}
+
+h2 {
+  @include font-size(beta);
+},
+
+h3 {
+  @include font-size(gamma);
+}
+
+h4 {
+  @include font-size(delta);
+}
+
+h5 {
+  @include font-size(epsilon);
+}
+
+h6 {
+  @include font-size(zeta);
+  font-style: italic;
 }
