@@ -4,7 +4,8 @@ html {
 
 
 body {
-  // @include font-size(zeta, all);
+  @include font-base(zeta);
+  @include line-height();
   font-style: normal;
   font-weight: 400;
   hyphens: auto;
