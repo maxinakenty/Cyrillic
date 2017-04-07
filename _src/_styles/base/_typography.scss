@@ -25,6 +25,7 @@ h5 {
 
 h1 {
   @include font-size(alpha);
+  @include margin-top(1);
 }
 
 h2 {
