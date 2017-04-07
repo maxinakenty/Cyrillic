@@ -2,10 +2,10 @@
   background-image: linear-gradient(
     to bottom,
     $color 1px, transparent 0,
-    transparent px(0.5 * $module),
-    $color px(0.5 * $module),
-    transparent px(0.5 * $module + 1),
-    transparent px($module));
+    transparent to-rem(0.5 * $module),
+    $color to-rem(0.5 * $module),
+    transparent to-rem(0.5 * $module + 1),
+    transparent to-rem($module));
 }
 
 @mixin grid() {
