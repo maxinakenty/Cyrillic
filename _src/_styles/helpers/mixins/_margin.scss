@@ -1,0 +1,30 @@
+@mixin margin-top($number) {
+  @for $i from 1 through $breakpoints-length {
+    $point: nth($breakpoints-keys, $i);
+
+    @include up($point) {
+      // if breakpoints-length > line-heights-length
+      @if $i > $line-heights-length {
+        $line-height: nth($line-heights-values, $line-heights-length);
+        $scale-key: nth($breakpoints-keys, $line-heights-length);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+        $module: $number * $leading;
+
+        margin-top: to-rem($module);
+        margin-top: px($module);
+
+      // if breakpoints-length < line-heights-length
+      }@else {
+        $line-height: nth($line-heights-values, $i);
+        $scale-key: nth($breakpoints-keys, $i);
+        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
+        $leading: round($font-base * $line-height);
+        $module: $number * $leading;
+
+        margin-top: to-rem($module);
+        margin-top: px($module);
+      }
+    }
+  }
+}
