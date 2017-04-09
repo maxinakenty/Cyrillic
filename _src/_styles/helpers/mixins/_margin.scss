@@ -1,3 +1,4 @@
+// MARGIN TOP
 @mixin margin-top($number: 1) {
   @for $i from 1 through $breakpoints_length {
     $point: nth($breakpoints_keys, $i);
@@ -8,25 +9,26 @@
         $line_height: nth($line_heights_values, $line_heights_length);
         $scale_key: nth($breakpoints_keys, $line_heights_length);
         $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $leading: round($font_base * $line_height);
-        $module: $number * $leading;
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
 
-        margin-top: to-rem($module);
+        margin-top: to-rem($result);
 
       // if breakpoints-length < line-heights-length
       }@else {
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($breakpoints_keys, $i);
         $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $leading: round($font_base * $line_height);
-        $module: $number * $leading;
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
 
-        margin-top: to-rem($module);
+        margin-top: to-rem($result);
       }
     }
   }
 }
 
+// MARGIN BOTTOM
 @mixin margin-bottom($number: 1) {
   @for $i from 1 through $breakpoints_length {
     $point: nth($breakpoints_keys, $i);
@@ -37,20 +39,69 @@
         $line_height: nth($line_heights_values, $line_heights_length);
         $scale_key: nth($breakpoints_keys, $line_heights_length);
         $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $leading: round($font_base * $line_height);
-        $module: $number * $leading;
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
 
-        margin-bottom: to-rem($module);
+        margin-bottom: to-rem($result);
 
       // if breakpoints-length < line-heights-length
       }@else {
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($breakpoints_keys, $i);
         $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $leading: round($font_base * $line_height);
-        $module: $number * $leading;
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
 
-        margin-bottom: to-rem($module);
+        margin-bottom: to-rem($result);
+      }
+    }
+  }
+}
+
+// MARGIN
+@mixin margin($top, $right, $bottom: null, $left: null) {
+  @for $i from 1 through $breakpoints_length {
+    $point: nth($breakpoints_keys, $i);
+
+    @include up($point) {
+
+      // if breakpoints-length > line-heights-length
+      @if $i > $line_heights_length {
+        $line_height: nth($line-heights_values, $line_heights_length);
+        $scale_key: nth($scale_keys, $line-heights_length);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font-base * $line_height);
+        $module_top: $top * $module;
+        $module_right: $right * $module;
+        $module_bottom: $bottom * $module;
+        $module_left: $left * $module;
+
+        @if $left == null and $bottom == null {
+          margin: to-rem($module_top) to-rem($module_right);
+        } @else if $left == null or $left == $right {
+          margin: to-rem($module_top) to-rem($module_right) to-rem($module_bottom);
+        } @else {
+          margin: to-rem($module_top) to-rem($module_right) to-rem($module_bottom) to-rem($module_left);
+        }
+
+      // if breakpoints-length < line-heights-length
+      }@else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($breakpoints_keys, $i);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $module_top: $top * $module;
+        $module_right: $right * $module;
+        $module_bottom: $bottom * $module;
+        $module_left: $left * $module;
+
+        @if $left == null and $bottom == null {
+          margin: rem($top * $leading, $root-size) rem($right * $leading, $root-size);
+        } @else if $left == null or $left == $right {
+          margin: to-rem($module_top) to-rem($module_right) to-rem($module_bottom);
+        } @else {
+          margin: to-rem($module_top) to-rem($module_right) to-rem($module_bottom) to-rem($module_left);
+        }
       }
     }
   }
