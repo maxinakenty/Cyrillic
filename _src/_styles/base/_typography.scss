@@ -13,6 +13,51 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+$headings: (
+  h1: (
+    line_height: 2,
+    margin_top: 4,
+    margin_bottom: 1,
+    ),
+  h2: (
+    line_height: 1.5,
+    margin_top: 2.5,
+    margin_bottom: 0.5,
+    ),
+  h3: (
+    line_height: 1,
+    margin_top: 2,
+    margin_bottom: 0.5,
+    ),
+  h4: (
+    line_height: 1,
+    margin_top: 1.5,
+    margin_bottom: 0.5,
+    ),
+  h5: (
+    line_height: 1,
+    margin_top: 2.5,
+    margin_bottom: 0.5,
+    ),
+  h6: (
+    line_height: 1,
+    margin_top: 2.5,
+    margin_bottom: 0.5,
+    )
+) !default;
+
+
+@mixin heading-baseline($heading) {
+  $line-height: map-deep-get($headings, $heading, line_height);
+  $margin-top: map-deep-get($headings, $heading, margin_top);
+  $margin-bottom: map-deep-get($headings, $heading, margin_bottom);
+
+  @include line-height($line-height);
+  @include margin-top($margin-top);
+  @include margin-bottom($margin-bottom);
+
+}
+
 h1,
 h2,
 h3,
@@ -25,30 +70,31 @@ h6 {
 
 h1 {
   @include font-size(alpha);
-  @include margin-top();
-  @include line-height();
-  @include margin-bottom(0.5);
+  @include heading-baseline(h1);
 }
 
 h2 {
   @include font-size(beta);
-  @include margin-top(0.5);
-  @include margin-bottom(0.5);
+  @include heading-baseline(h2);
 },
 
 h3 {
   @include font-size(gamma);
+  @include heading-baseline(h3);
 }
 
 h4 {
   @include font-size(delta);
+  @include heading-baseline(h4);
 }
 
 h5 {
   @include font-size(epsilon);
+  @include heading-baseline(h5);
 }
 
 h6 {
   @include font-size(zeta);
+  @include heading-baseline(h6);
   font-style: italic;
 }
