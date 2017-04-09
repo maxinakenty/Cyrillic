@@ -1,24 +1,24 @@
 @mixin margin-top($number: 1) {
-  @for $i from 1 through $breakpoints-length {
-    $point: nth($breakpoints-keys, $i);
+  @for $i from 1 through $breakpoints_length {
+    $point: nth($breakpoints_keys, $i);
 
     @include up($point) {
       // if breakpoints-length > line-heights-length
-      @if $i > $line-heights-length {
-        $line-height: nth($line-heights-values, $line-heights-length);
-        $scale-key: nth($breakpoints-keys, $line-heights-length);
-        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
-        $leading: round($font-base * $line-height);
+      @if $i > $line-heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+        $scale_key: nth($breakpoints_keys, $line_heights_length);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $leading: round($font_base * $line_height);
         $module: $number * $leading;
 
         margin-top: to-rem($module);
 
       // if breakpoints-length < line-heights-length
       }@else {
-        $line-height: nth($line-heights-values, $i);
-        $scale-key: nth($breakpoints-keys, $i);
-        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
-        $leading: round($font-base * $line-height);
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($breakpoints_keys, $i);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $leading: round($font_base * $line_height);
         $module: $number * $leading;
 
         margin-top: to-rem($module);
@@ -28,26 +28,26 @@
 }
 
 @mixin margin-bottom($number: 1) {
-  @for $i from 1 through $breakpoints-length {
-    $point: nth($breakpoints-keys, $i);
+  @for $i from 1 through $breakpoints_length {
+    $point: nth($breakpoints_keys, $i);
 
     @include up($point) {
       // if breakpoints-length > line-heights-length
       @if $i > $line-heights-length {
-        $line-height: nth($line-heights-values, $line-heights-length);
-        $scale-key: nth($breakpoints-keys, $line-heights-length);
-        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
-        $leading: round($font-base * $line-height);
+        $line_height: nth($line_heights_values, $line_heights_length);
+        $scale_key: nth($breakpoints_keys, $line_heights_length);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $leading: round($font_base * $line_height);
         $module: $number * $leading;
 
         margin-bottom: to-rem($module);
 
       // if breakpoints-length < line-heights-length
       }@else {
-        $line-height: nth($line-heights-values, $i);
-        $scale-key: nth($breakpoints-keys, $i);
-        $font-base: map-deep-get($modular-scale, $scale-key, zeta);
-        $leading: round($font-base * $line-height);
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($breakpoints_keys, $i);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $leading: round($font_base * $line_height);
         $module: $number * $leading;
 
         margin-bottom: to-rem($module);
