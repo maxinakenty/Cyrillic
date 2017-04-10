@@ -64,7 +64,7 @@
         }
 
       // if breakpoints-length < line-heights-length
-      }@else {
+      } @else {
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($breakpoints_keys, $i);
         $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
