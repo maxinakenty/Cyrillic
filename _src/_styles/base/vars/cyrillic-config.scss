@@ -15,6 +15,14 @@ $cyrillic: (
     xl: 1300    // 1300px wide
   ),
 
+  measures: (
+    xs: 500,  // 500px wide
+    sm: 550,  // 550px wide
+    md: 600,  // 600px wide
+    lg: 680,  // 680px wide
+    xl: 750   // 750px wide
+  ),
+
   modular_scale: (
     // Major Third http://www.modularscale.com/?16,28&px&1.25&web&text
     xs: (
@@ -126,6 +134,11 @@ $breakpoints_keys: map-keys($breakpoints) !default;
 // MAXWIDTH
 $max_widths: map-get($cyrillic, max_widths) !default;
 $max_widths_values: map-values($max_widths) !default;
+
+// MEASURE
+$measures: map-get($cyrillic, measures) !default;
+$measures_values: map-values($measures) !default;
+
 
 // MODULAR SCALE
 $modular_scale: map-get($cyrillic, modular_scale) !default;
