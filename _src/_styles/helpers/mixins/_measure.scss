@@ -1,0 +1,24 @@
+// MEASURE
+@mixin measure($name) {
+  @if $name != all {
+    $measure: map-deep-get($cyrillic, measures, $name);
+
+    @if $measure {
+      max-width: to-rem($measure);
+
+    } @else {
+      @warn "#{$name} is not valid to use as a measure ";
+    }
+  } @else if $name == all {
+    $measure: map-deep-get($cyrillic, measures, xs);
+
+    @for $i from 2 through $breakpoints_length {
+      $breakpoint: nth($breakpoints_values, $i);
+
+      @include up($breakpoint) {
+        $measure: nth($measures_values, $i);
+        max-width: to-rem($measure);
+      }
+    }
+  }
+}
