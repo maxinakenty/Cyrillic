@@ -1,3 +1,34 @@
+// PADDING TOP
+@mixin padding-top($number: 1) {
+  @for $i from 1 through $breakpoints_length {
+    $point: nth($breakpoints_keys, $i);
+
+    @include up($point) {
+      // if breakpoints-length > line-heights-length
+      @if $i > $line-heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+        $scale_key: nth($breakpoints_keys, $line_heights_length);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
+
+        padding-top: to-rem($result);
+
+      // if breakpoints-length < line-heights-length
+      }@else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($breakpoints_keys, $i);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $result: $number * $module;
+
+        padding-top: to-rem($result);
+      }
+    }
+  }
+}
+
+
 // PADDING
 @mixin padding($top, $right: null, $bottom: null, $left: null) {
   @for $i from 1 through $breakpoints_length {
