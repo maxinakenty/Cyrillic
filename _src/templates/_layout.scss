@@ -11,7 +11,7 @@ body {
 }
 
 .content {
-  display: flex;
+  // display: flex;
   flex: 1 0 auto;
 }
 
@@ -22,5 +22,57 @@ body {
 }
 
 .container {
-  @include container(gap);
+  position: relative;
+  width: 94%;
+  margin: 0 auto;
+  clear: fix;
+  background-color: rgba(black, 0.1);
+
+  @include up(lg) {
+    @include max-width(lg);
+  }
+
+  @include up(xl) {
+    @include max-width(xl);
+  }
+}
+
+.single-measure {
+  @include measure(all);
+  background-color: rgba(black, 0.1);
+  margin: 0 auto;
+}
+
+.column {
+  @include measure(xs);
+
+  margin: 0 auto;
+  width: 100%;
+
+  @include up(sm) {
+    float: left;
+    margin: initial;
+    max-width: initial;
+    @include padding(0, 0.5);
+  }
+
+  @include up(lg) {
+    @include padding(0, 1);
+  }
+}
+
+// Two columns.
+.column--duo {
+
+  @include up(sm) {
+    @include col(6)
+
+    &:nth-of-type(2n+3) {
+      clear: left;
+    }
+
+    &:nth-of-type(n+3) {
+      @include margin-top(1.5);
+    }
+  }
 }
