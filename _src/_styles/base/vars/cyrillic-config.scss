@@ -7,6 +7,14 @@ $cyrillic: (
    xl: 1600    // 1600px  ~ Large desktop up
   ),
 
+  max_widths: (
+    xs: 500,    // 500px wide
+    sm: 600,    // 600px wide
+    md: 800,    // 800px wide
+    lg: 1000,   // 110px wide
+    xl: 1300    // 1300px wide
+  ),
+
   modular_scale: (
     // Major Third http://www.modularscale.com/?16,28&px&1.25&web&text
     xs: (
@@ -111,8 +119,13 @@ $cyrillic: (
 
 // BREAKPOINTS
 $breakpoints: map-get($cyrillic, breakpoints) !default;
+$breakpoints_values: map-values($breakpoints) !default;
 $breakpoints_length: length($breakpoints) !default;
 $breakpoints_keys: map-keys($breakpoints) !default;
+
+// MAXWIDTH
+$max_widths: map-get($cyrillic, max_widths) !default;
+$max_widths_values: map-values($max_widths) !default;
 
 // MODULAR SCALE
 $modular_scale: map-get($cyrillic, modular_scale) !default;
