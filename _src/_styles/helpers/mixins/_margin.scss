@@ -81,10 +81,12 @@
           margin: to-rem($module_top $module_right);
 
         } @else if $left == null or $left == $right {
+          $module_right: $right * $module;
           $module_bottom: $bottom * $module;
           margin: to-rem($module_top $module_right $module_bottom);
 
         } @else {
+          $module_right: $right * $module;
           $module_bottom: $bottom * $module;
           $module_left: $left * $module;
           margin: to-rem($module_top $module_right $module_bottom $module_left);
@@ -106,10 +108,12 @@
           margin: to-rem($module_top $module_right);
 
         } @else if $left == null or $left == $right {
+          $module_right: $right * $module;
           $module_bottom: $bottom * $module;
           margin: to-rem($module_top $module_right $module_bottom);
 
         } @else {
+          $module_right: $right * $module;
           $module_bottom: $bottom * $module;
           $module_left: $left * $module;
           margin: to-rem($module_top $module_right $module_bottom $module_left);
