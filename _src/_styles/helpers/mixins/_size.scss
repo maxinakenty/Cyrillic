@@ -1,0 +1,33 @@
+// WIDTH
+@mixin size($width, $height: $width) {
+  @for $i from 1 through $breakpoints_length {
+    $point: nth($breakpoints_keys, $i);
+
+    @include up($point) {
+      // if breakpoints-length > line-heights-length
+      @if $i > $line-heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+        $scale_key: nth($breakpoints_keys, $line_heights_length);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $module_width: $width * $module;
+        $module_height: $height * $module;
+
+        width: to-rem($module_width);
+        height: to-rem($module_height);
+
+      // if breakpoints-length < line-heights-length
+      }@else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($breakpoints_keys, $i);
+        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $module_width: $width * $module;
+        $module_height: $height * $module;
+
+        width: to-rem($module_width);
+        height: to-rem($module_height);
+      }
+    }
+  }
+}
