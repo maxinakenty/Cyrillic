@@ -2,6 +2,7 @@ html,
 body {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  background-color: $bg_color;
 }
 
 *,
@@ -48,4 +49,5 @@ select {
 
 .double-grid {
   @include double-grid();
+  // @include grid();
 }
