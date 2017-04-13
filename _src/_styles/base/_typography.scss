@@ -9,8 +9,10 @@ body {
   font-weight: 400;
   hyphens: auto;
   text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  color: #222;
+  font-family: 'Gentium Book Basic', serif;
 }
 
 h1,
@@ -19,13 +21,26 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: bold;
-  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
   @include font_size(alpha);
   @include heading-baseline(h1);
+  @include line-height(1.5);
+
+  @include up(sm) {
+    @include line-height(2.5);
+  }
+
+  @include up(md) {
+    @include line-height(3);
+  }
+
+  @include up(lg) {
+    @include line-height(4);
+  }
 }
 
 h2 {
@@ -51,9 +66,48 @@ h5 {
 h6 {
   @include font_size(zeta);
   @include heading-baseline(h6);
-  font-style: italic;
+  // font-style: italic;
 }
 
-p {
+p,
+ul,
+ol,
+blockquote {
   @include margin-bottom(1);
+  font-size: 95%;
+}
+
+blockquote {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: italic;
+  @include padding(0, 0, 0, 1);
+
+  @include up(md) {
+    @include padding(0, 0, 0, 2);
+  }
+}
+
+
+a {
+  color: $link_color;
+  text-decoration: none;
+  transition: color .1s, background-color .1s;
+
+  &:hover, &:active, &:focus {
+    color: darken($link_color, 10%);
+    text-decoration: none;
+    background-image: none;
+  }
+}
+
+p a,
+li a {
+ @include up(sm) {
+  background: linear-gradient(to bottom,transparent 50%, $link_color 0) repeat-x 0 93% / 100% 1px;
+  text-shadow: 0.1rem 0 $bg_color,
+               0.15rem 0 $bg_color,
+              -0.1rem 0 $bg_color,
+              -0.15rem 0 $bg_color;
+ }
 }
