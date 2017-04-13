@@ -89,3 +89,49 @@
     }
   }
 }
+
+
+@mixin double-grid() {
+  $line_height: line-height(xs);
+  $font_base: map-deep-get($modular_scale, xs, zeta);
+  $module: round($font_base * $line_height);
+
+
+  @include double-grid-gradient($module, $grid_line_bg);
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: 100% to-rem($module);
+
+  @for $i from 2 through $breakpoints_length {
+    $breakpoint_key: nth($breakpoints_keys, $i);
+
+    @include up($breakpoint_key) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line_heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+
+          @include double-grid-gradient($module, $grid_line_bg);
+          background-size: 100% to-rem($module);
+          background-size: 100% px($module);
+        }
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($scale-keys, $i);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+
+        @include double-grid-gradient($module, $grid_line_bg);
+
+        background-size: 100% to-rem($module);
+        background-size: 100% px($module);
+      }
+    }
+  }
+}
