@@ -8,6 +8,7 @@
     transparent to-rem($module));
 }
 
+
 @mixin grid() {
   $line_height: line-height(xs);
   $font_base: map-deep-get($cyrillic, modular_scale, xs, zeta);
@@ -25,18 +26,27 @@
 
       // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line_heights_length {
-        $line-height: nth($line_heights_values, $line_heights_length);
-
-        // ограничиваем длину $modular-scale до  длины $line-heights
-        $scale_key: nth($scale_keys, $line_heights_length);
-        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
-
-        background-size: 100% to-rem($module);
+        $line_height: nth($line_heights_values, $line_heights_length);
 
         @if $i > $scale_length {
+          @debug $i;
+          // берём последнее значение из $modular_scale
+          $scale_key: nth($scale_keys, $scale_length);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+          background-size: 100% to-rem($module);
+          background-size: 100% px($module);
+          @debug 'если значений bp больше чем значений в ms';
 
+        } @else {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+          background-size: 100% to-rem($module);
+          background-size: 100% px($module);
+          @debug 'если значений bp одинаковое количество с ms';
         }
+
 
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -46,6 +56,47 @@
         $module: round($font_base * $line_height);
 
         background-size: 100% to-rem($module);
+      }
+    }
+  }
+}
+
+@mixin grid() {
+  $line_height: line-height(xs);
+  $font_base: map-deep-get($modular_scale, xs, zeta);
+  $module: round($font_base * $line_height);
+
+  background-image: linear-gradient(to bottom, $grid_line_bg 1px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat;
+  background-size: 100% to-rem($module);
+
+  @for $i from 2 through $breakpoints_length {
+    $breakpoint_key: nth($breakpoints_keys, $i);
+
+    @include up($breakpoint_key) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line_heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+
+          background-size: 100% to-rem($module);
+          background-size: 100% px($module);
+        }
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($scale_keys, $i);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+
+        background-size: 100% to-rem($module);
+        background-size: 100% px($module);
       }
     }
   }
