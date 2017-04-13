@@ -19,9 +19,9 @@
   background-size: 100% to-rem($module);
 
   @for $i from 2 through $breakpoints_length {
-    $point: nth($breakpoints_keys, $i);
+    $breakpoint_key: nth($breakpoints_keys, $i);
 
-    @include up($point) {
+    @include up($breakpoint_key) {
 
       // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line_heights_length {
@@ -34,11 +34,15 @@
 
         background-size: 100% to-rem($module);
 
+        @if $i > $scale_length {
+
+        }
+
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($scale_keys, $i);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
         $module: round($font_base * $line_height);
 
         background-size: 100% to-rem($module);
@@ -49,7 +53,7 @@
 
 @mixin double-grid() {
   $line_height: line-height(xs);
-  $font_base: map-deep-get($cyrillic, modular_scale, xs, zeta);
+  $font_base: map-deep-get($modular_scale, xs, zeta);
   $module: round($font_base * $line_height);
 
 
@@ -59,15 +63,15 @@
   background-size: 100% to-rem($module);
 
   @for $i from 2 through $breakpoints_length {
-    $point: nth($breakpoints_keys, $i);
+    $breakpoint_key: nth($breakpoints_keys, $i);
 
-    @include up($point) {
+    @include up($breakpoint_key) {
 
       // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line_heights_length {
         $line_height: nth($line_heights_values, $line_heights_length);
         $scale_key: nth($scale_keys, $line_heights_length);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
         $module: round($font-base * $line-height);
 
         @include double-grid-gradient($module, $grid_line_bg);
@@ -77,7 +81,7 @@
       } @else {
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($scale-keys, $i);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
         $module: round($font_base * $line_height);
 
         @include double-grid-gradient($module, $grid_line_bg);
