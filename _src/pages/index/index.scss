@@ -1,0 +1,13 @@
+.major {
+  text-transform: uppercase;
+  position: relative;
+  letter-spacing: -0.015em;
+
+  span {
+    display: block;
+  }
+
+  @include up(sm) {
+    width: 140%;
+  }
+}
