@@ -17,8 +17,8 @@
           $module_width: $width * $module;
           $module_height: $height * $module;
 
-          width: to-rem($module_width);
-          height: to-rem($module_height);
+          width: rem($module_width);
+          height: rem($module_height);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -29,8 +29,8 @@
         $module_width: $width * $module;
         $module_height: $height * $module;
 
-        width: to-rem($module_width);
-        height: to-rem($module_height);
+        width: rem($module_width);
+        height: rem($module_height);
       }
     }
   }
