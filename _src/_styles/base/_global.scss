@@ -44,6 +44,6 @@ select {
 // VERTICAL GRIDS
 
 .double-grid {
-  // @include double-grid();
-  @include grid();
+  @include double-grid();
+  // @include grid();
 }
