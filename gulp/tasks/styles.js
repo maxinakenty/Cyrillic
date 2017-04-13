@@ -6,6 +6,7 @@ var processors = require('../postcss.config');
 
 var $ = require('gulp-load-plugins')();
 var combine = require('stream-combiner2').obj;
+var cssnano = require('gulp-cssnano');
 
 var IS_DEVELOPMENT = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'; // Changing environment
 
@@ -17,7 +18,7 @@ gulp.task('styles', function() {
     $.postcss(processors),
     $.if(IS_DEVELOPMENT, $.sourcemaps.write()),
     $.if(!IS_DEVELOPMENT, combine(
-      $.cssnano()
+      cssnano()
     )),
     gulp.dest(__paths.dist.css)
   ).on('error', $.notify.onError());
