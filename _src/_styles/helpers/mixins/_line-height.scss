@@ -13,7 +13,6 @@
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
           $module: round($font_base * $line_height);
-
           $result: $number * $module;
 
           line-height: rem($result);
@@ -24,7 +23,6 @@
         $scale_key: nth($scale_keys, $i);
         $font_base: map-deep-get($modular_scale, $scale_key, zeta);
         $module: round($font_base * $line_height);
-
         $result: $number * $module;
 
         line-height: rem($result);
