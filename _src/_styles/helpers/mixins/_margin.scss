@@ -18,7 +18,6 @@
           $result: $number * $module;
 
           margin-top: rem($result);
-          margin-top: px($result);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -30,7 +29,6 @@
           $result: $number * $module;
 
           margin-top: rem($result);
-          margin-top: px($result);
       }
     }
   }
@@ -57,7 +55,6 @@
           $result: $number * $module;
 
           margin-bottom: rem($result);
-          margin-bottom: px($result);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -69,18 +66,27 @@
           $result: $number * $module;
 
           margin-bottom: rem($result);
-          margin-bottom: px($result);
       }
     }
   }
 }
 
-// Получаем значение в виде числа или возвращаем стоку (например auto)
-@function rem-or-not($value, $string) {
-  $result: if($value == $string, $string, rem($value * $module));
+// Получаем значение в виде числа или возвращаем стоку (например auto, inheright or initial)
+@function rem-or-not($value) {
+  $typeof_value: type-of($value);
 
-  @return $result;
+  @if $typeof_value == string {
+    @return $value;
+
+  } @else if $typeof_value == number {
+    @return rem($value * $module);
+
+  } @else {
+    @warn "typeof value must be a string or number";
+  }
 }
+
+
 
 // MARGIN
 @mixin margin($top, $right: null, $bottom: null, $left: null) {
@@ -104,15 +110,15 @@
             margin: if($module_top == auto, auto, rem($module_top));
 
           } @else if $left == null and $bottom == null {
-              margin: rem($module_top) rem-or-not($right, auto);
+              margin: rem($module_top) rem-or-not($right);
 
           } @else if $left == null or $left == $right {
               $module_bottom: $bottom * $module;
-              margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom);
+              margin: rem($module_top) rem-or-not($right) rem($module_bottom);
 
           } @else {
               $module_bottom: $bottom * $module;
-              margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom) rem-or-not($left, auto);
+              margin: rem($module_top) rem-or-not($right) rem($module_bottom) rem-or-not($left);
           }
         }
       // если значений $line-height и $breakpoints одинаковое количество
@@ -127,15 +133,15 @@
           margin: if($module_top == auto, auto, rem($module_top));
 
         } @else if $left == null and $bottom == null {
-            margin: rem($module_top) rem-or-not($right, auto);
+            margin: rem($module_top) rem-or-not($right);
 
         } @else if $left == null or $left == $right {
             $module_bottom: $bottom * $module;
-            margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom);
+            margin: rem($module_top) rem-or-not($right) rem($module_bottom);
 
         } @else {
             $module_bottom: $bottom * $module;
-            margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom) rem-or-not($right, auto);
+            margin: rem($module_top) rem-or-not($right) rem($module_bottom) rem-or-not($right);
         }
       }
     }
