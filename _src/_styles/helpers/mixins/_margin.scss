@@ -72,7 +72,7 @@
 }
 
 // Получаем значение в виде числа или возвращаем стоку (например auto, inheright or initial)
-@function rem-or-not($value) {
+@function rem-or-not($value, $module) {
   $typeof_value: type-of($value);
 
   @if $typeof_value == string {
@@ -104,21 +104,18 @@
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
           $module: round($font_base * $line_height);
-          $module_top: if($top == auto, auto, $top * $module);
 
           @if $right == null and $bottom == null and $left == null {
-            margin: if($module_top == auto, auto, rem($module_top));
+            margin: rem-or-not($top, $module);
 
           } @else if $left == null and $bottom == null {
-              margin: rem($module_top) rem-or-not($right);
+              margin: rem-or-not($top) rem-or-not($right);
 
           } @else if $left == null or $left == $right {
-              $module_bottom: $bottom * $module;
-              margin: rem($module_top) rem-or-not($right) rem($module_bottom);
+              margin: rem-or-not($top) rem-or-not($right) rem-or-not($top);
 
           } @else {
-              $module_bottom: $bottom * $module;
-              margin: rem($module_top) rem-or-not($right) rem($module_bottom) rem-or-not($left);
+              margin: rem-or-not($top) rem-or-not($right) rem-or-not($top) rem-or-not($left);
           }
         }
       // если значений $line-height и $breakpoints одинаковое количество
@@ -127,21 +124,18 @@
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
           $module: round($font_base * $line_height);
-          $module_top: if($top == auto, auto, $top * $module);
 
         @if $right == null and $bottom == null and $left == null {
-          margin: if($module_top == auto, auto, rem($module_top));
+          margin: rem-or-not($top, $module);
 
         } @else if $left == null and $bottom == null {
-            margin: rem($module_top) rem-or-not($right);
+            margin: rem-or-not($top) rem-or-not($right);
 
         } @else if $left == null or $left == $right {
-            $module_bottom: $bottom * $module;
-            margin: rem($module_top) rem-or-not($right) rem($module_bottom);
+            margin: rem-or-not($top) rem-or-not($right) rem-or-not($top);
 
         } @else {
-            $module_bottom: $bottom * $module;
-            margin: rem($module_top) rem-or-not($right) rem($module_bottom) rem-or-not($right);
+            margin: rem-or-not($top) rem-or-not($right) rem-or-not($top) rem-or-not($right);
         }
       }
     }
