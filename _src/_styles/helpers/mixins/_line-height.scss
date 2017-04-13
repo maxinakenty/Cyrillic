@@ -16,8 +16,7 @@
 
           $result: $number * $module;
 
-          line-height: to-rem($result);
-          line-height: px($result);
+          line-height: rem($result);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
@@ -28,8 +27,7 @@
 
         $result: $number * $module;
 
-        line-height: to-rem($result);
-        line-height: px($result);
+        line-height: rem($result);
       }
     }
   }
