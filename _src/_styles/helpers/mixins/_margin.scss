@@ -138,3 +138,72 @@
     }
   }
 }
+
+
+
+@mixin margin($top, $right: null, $bottom: null, $left: null) {
+  @for $i from 1 through $breakpoints_length {
+    $breakpoint_key: nth($breakpoints_keys, $i);
+
+    @include up($breakpoint_key) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line_heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+
+        // если $breakpoints меньше или равно $modular_scale_lenght
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+          $module_top: $top * $module;
+
+          @if $right == null and $bottom == null and $left == null {
+            margin: to-rem($module_top);
+
+          } @else if $left == null and $bottom == null {
+            $module_right: $right * $module;
+            margin: to-rem($module_top $module_right);
+
+          } @else if $left == null or $left == $right {
+            $module_right: $right * $module;
+            $module_bottom: $bottom * $module;
+            margin: to-rem($module_top $module_right $module_bottom);
+
+          } @else {
+            $module_right: $right * $module;
+            $module_bottom: $bottom * $module;
+            $module_left: $left * $module;
+            margin: to-rem($module_top $module_right $module_bottom $module_left);
+          }
+        }
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($scale_keys, $i);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+        $module_top: $top * $module;
+
+        @if $right == null and $bottom == null and $left == null {
+          margin: to-rem($module_top);
+
+        } @else if $left == null and $bottom == null {
+          $module_right: $right * $module;
+          margin: to-rem($module_top $module_right);
+
+        } @else if $left == null or $left == $right {
+          $module_right: $right * $module;
+          $module_bottom: $bottom * $module;
+          margin: to-rem($module_top $module_right $module_bottom);
+
+        } @else {
+          $module_right: $right * $module;
+          $module_bottom: $bottom * $module;
+          $module_left: $left * $module;
+          margin: to-rem($module_top $module_right $module_bottom $module_left);
+        }
+      }
+    }
+  }
+}
