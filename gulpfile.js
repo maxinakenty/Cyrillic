@@ -26,7 +26,7 @@ gulp.task('build:production', gulp.series(
   'updateHtml',
   'revScripts',
   'updateHtml',
-  'favicon',
+  // 'favicon',
   'htmlComb',
   'zip',
   'sizeReport'));
