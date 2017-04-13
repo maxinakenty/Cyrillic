@@ -17,24 +17,25 @@
 
           $result: $number * $module;
 
-          margin-top: to-rem($result);
+          margin-top: rem($result);
           margin-top: px($result);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
-        $line_height: nth($line_heights_values, $i);
-        $scale_key: nth($scale_keys, $i);
-        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
+          $line_height: nth($line_heights_values, $i);
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
 
-        $result: $number * $module;
+          $result: $number * $module;
 
-        margin-top: to-rem($result);
-        margin-top: px($result);
+          margin-top: rem($result);
+          margin-top: px($result);
       }
     }
   }
 }
+
 
 // MARGIN BOTTOM
 @mixin margin-bottom($number: 1) {
@@ -55,23 +56,30 @@
 
           $result: $number * $module;
 
-          margin-bottom: to-rem($result);
+          margin-bottom: rem($result);
           margin-bottom: px($result);
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
-        $line_height: nth($line_heights_values, $i);
-        $scale_key: nth($scale_keys, $i);
-        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
+          $line_height: nth($line_heights_values, $i);
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
 
-        $result: $number * $module;
+          $result: $number * $module;
 
-        margin-bottom: to-rem($result);
-        margin-bottom: px($result);
+          margin-bottom: rem($result);
+          margin-bottom: px($result);
       }
     }
   }
+}
+
+// Получаем значение в виде числа или возвращаем стоку (например auto)
+@function rem-or-not($value, $string) {
+  $result: if($value == $string, $string, rem($value * $module));
+
+  @return $result;
 }
 
 // MARGIN
@@ -93,59 +101,41 @@
           $module_top: if($top == auto, auto, $top * $module);
 
           @if $right == null and $bottom == null and $left == null {
-            margin: if($module_top == auto, auto, to-rem($module_top));
+            margin: if($module_top == auto, auto, rem($module_top));
 
           } @else if $left == null and $bottom == null {
-
-            @if $right == auto {
-              margin: to-rem($module_top) $right;
-            } @else {
-              $module_right: $right * $module;
-              margin: to-rem($module_top $module_right);
-            }
+              margin: rem($module_top) rem-or-not($right, auto);
 
           } @else if $left == null or $left == $right {
-            $module_right: $right * $module;
-            $module_bottom: $bottom * $module;
-            margin: to-rem($module_top $module_right $module_bottom);
+              $module_bottom: $bottom * $module;
+              margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom);
 
           } @else {
-            $module_right: $right * $module;
-            $module_bottom: $bottom * $module;
-            $module_left: $left * $module;
-            margin: to-rem($module_top $module_right $module_bottom $module_left);
+              $module_bottom: $bottom * $module;
+              margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom) rem-or-not($left, auto);
           }
         }
       // если значений $line-height и $breakpoints одинаковое количество
       } @else {
-        $line_height: nth($line_heights_values, $i);
-        $scale_key: nth($scale_keys, $i);
-        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
-        $module_top: if($top == auto, auto, $top * $module);
+          $line_height: nth($line_heights_values, $i);
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+          $module_top: if($top == auto, auto, $top * $module);
 
         @if $right == null and $bottom == null and $left == null {
-          margin: if($module_top == auto, auto, to-rem($module_top));
+          margin: if($module_top == auto, auto, rem($module_top));
 
         } @else if $left == null and $bottom == null {
-
-          @if $right == auto {
-            margin: to-rem($module_top) $right;
-          } @else {
-            $module_right: $right * $module;
-            margin: to-rem($module_top $module_right);
-          }
+            margin: rem($module_top) rem-or-not($right, auto);
 
         } @else if $left == null or $left == $right {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          margin: to-rem($module_top $module_right $module_bottom);
+            $module_bottom: $bottom * $module;
+            margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom);
 
         } @else {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          $module_left: $left * $module;
-          margin: to-rem($module_top $module_right $module_bottom $module_left);
+            $module_bottom: $bottom * $module;
+            margin: rem($module_top) rem-or-not($right, auto) rem($module_bottom) rem-or-not($right, auto);
         }
       }
     }
