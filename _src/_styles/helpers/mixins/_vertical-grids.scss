@@ -2,10 +2,10 @@
   background-image: linear-gradient(
     to bottom,
     $color 1px, transparent 0,
-    transparent to-rem(0.5 * $module),
-    $color to-rem(0.5 * $module),
-    transparent to-rem(0.5 * $module + 1),
-    transparent to-rem($module));
+    transparent rem(0.5 * $module),
+    $color rem(0.5 * $module),
+    transparent rem(0.5 * $module + 1),
+    transparent rem($module));
 }
 
 
@@ -17,7 +17,7 @@
   background-image: linear-gradient(to bottom, $grid_line_bg 1px, transparent 0);
   background-position: left top;
   background-repeat: repeat;
-  background-size: 100% to-rem($module);
+  background-size: 100% rem($module);
 
   @for $i from 2 through $breakpoints_length {
     $breakpoint_key: nth($breakpoints_keys, $i);
@@ -33,7 +33,7 @@
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
           $module: round($font_base * $line_height);
 
-          background-size: 100% to-rem($module);
+          background-size: 100% rem($module);
           background-size: 100% px($module);
         }
       // если значений $line-height и $breakpoints одинаковое количество
@@ -43,7 +43,7 @@
         $font_base: map-deep-get($modular_scale, $scale_key, zeta);
         $module: round($font_base * $line_height);
 
-        background-size: 100% to-rem($module);
+        background-size: 100% rem($module);
         background-size: 100% px($module);
       }
     }
@@ -59,7 +59,7 @@
   @include double-grid-gradient($module, $grid_line_bg);
   background-position: left top;
   background-repeat: repeat;
-  background-size: 100% to-rem($module);
+  background-size: 100% rem($module);
 
   @for $i from 2 through $breakpoints_length {
     $breakpoint_key: nth($breakpoints_keys, $i);
@@ -76,7 +76,7 @@
           $module: round($font_base * $line_height);
 
           @include double-grid-gradient($module, $grid_line_bg);
-          background-size: 100% to-rem($module);
+          background-size: 100% rem($module);
           background-size: 100% px($module);
         }
       // если значений $line-height и $breakpoints одинаковое количество
@@ -88,7 +88,7 @@
 
         @include double-grid-gradient($module, $grid_line_bg);
 
-        background-size: 100% to-rem($module);
+        background-size: 100% rem($module);
         background-size: 100% px($module);
       }
     }
