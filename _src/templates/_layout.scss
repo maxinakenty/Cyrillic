@@ -17,8 +17,7 @@ body {
 
 .footer {
   flex: 0 0 auto;
-  height: 200px;
-  background: rgba(black, 0.3);
+  @include height(6);
 }
 
 .container {
@@ -26,7 +25,7 @@ body {
   width: 94%;
   margin: 0 auto;
   clear: fix;
-  background-color: rgba(black, 0.1);
+  // background-color: rgba(black, 0.05);
 
   @include up(lg) {
     @include max-width(lg);
@@ -39,11 +38,10 @@ body {
 
 .single-measure {
   @include measure(all);
-  background-color: rgba(black, 0.1);
   margin: 0 auto;
 }
 
-.column {
+%column {
   @include measure(xs);
 
   margin: 0 auto;
@@ -63,7 +61,7 @@ body {
 
 // Two columns.
 .column--duo {
-
+  @extend %column;
   @include up(sm) {
     @include col(6)
 
@@ -76,3 +74,174 @@ body {
     }
   }
 }
+
+// Three columns.
+.column--trio {
+  @extend %column;
+  @include up(sm) {
+    @include col(4);
+
+    &:nth-of-type(3n+4) {
+      clear: left;
+    }
+
+    &:nth-of-type(n+4) {
+      @include margin-top(1.5);
+    }
+  }
+}
+
+// Four columns. Two at smaller breakpoints.
+.column--quad {
+  @extend %column;
+  @include up(sm) {
+    @include col(6);
+  }
+
+  @include up(md) {
+    @include col(3);
+  }
+}
+
+// Main column.
+.column--main {
+  @extend %column;
+  @include up(sm) {
+    @include ideal-measure(sm, 0.5);
+  }
+
+  @include up(md) {
+    @include ideal-measure(md);
+  }
+
+  @include up(lg) {
+    @include ideal-measure(lg);
+  }
+
+  @include up(xl) {
+    @include ideal-measure(xl);
+  }
+}
+
+// Sidebar.
+.column--sidebar {
+  @extend %column;
+  @include up(sm) {
+    @include ideal-measure(sm, 1, false);
+
+    // padding-right: get-gutter-width(md);
+  }
+
+  @include up(md) {
+    @include ideal-measure(md, 1, false);
+  }
+
+  @include up(lg) {
+    @include ideal-measure(lg, 1, false);
+
+    // padding-right: get-gutter-width(lg);
+  }
+
+  @include up(xl) {
+    @include ideal-measure(xl, 1, false);
+  }
+}
+
+// If sidebar on the right side.
+.column--main + .column--sidebar {
+  @include up(sm) {
+   @include padding(0, 1, 0, 2);
+  }
+}
+
+// Set the main text one level down in the modular scale for narrower columns.
+.column--trio,
+.column--quad,
+.column--sidebar {
+
+  @include up(lg) {
+
+    p {
+      @include font-size(eta);
+    }
+
+    li {
+      @include font-size(eta);
+    }
+  }
+}
+
+
+// Main column on the right with inline sidenotes.
+// The sidenotes will move out the column into the sidebar position aligned to the baseline.
+.column--right {
+  @include up(sm) {
+    // @include ideal-measure(sm);
+    @include ideal-measure(sm, 0.5, false, margin-left);
+  }
+
+  @include up(md) {
+    @include ideal-measure(md, 2.5, false, margin-left);
+  }
+
+  .sidenote {
+
+    @include up(sm) {
+      @include ideal-measure(sm, 1, false);
+
+      position: absolute;
+      left: 0;
+      @include padding(0, 1);
+    }
+  }
+}
+
+// Main column on the left with inline sidenotes.
+.column--left {
+
+  @include up(sm) {
+    @include ideal-measure(sm);
+  }
+
+  @include up(md) {
+    @include ideal-measure(md);
+  }
+
+  @include up(lg) {
+    @include ideal-measure(lg);
+  }
+
+  @include up(xl) {
+    @include ideal-measure(xl, 2.5);
+  }
+
+  .sidenote {
+
+    @include up(sm) {
+      position: absolute;
+      @include ideal-measure(sm, 1, false);
+      @include ideal-measure(sm, 1, true, left);
+      @include padding(0, 1);
+    }
+
+    @include up(md) {
+      @include ideal-measure(md, 1, false);
+      @include ideal-measure(md, 1, true, left);
+    }
+
+    @include up(lg) {
+      @include ideal-measure(lg, 2.5, false);
+      @include ideal-measure(lg, 2.5, true, left);
+    }
+
+    @include up(xl) {
+      @include ideal-measure(xl, 2.5, false);
+      @include ideal-measure(xl, 2.5, true, left);
+    }
+  }
+}
+
+ .caption {
+  @include font-size(theta);
+
+ }
