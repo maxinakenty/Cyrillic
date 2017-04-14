@@ -5,7 +5,7 @@
 ///
 /// @param {String} $string - string
 /// @param {Map} $breakpoints - map
-/// @return {String} A string containing the map's contents.
+/// @return {String} A string containing the value of the map key
 @function breakpoint-next($name, $breakpoints, $breakpoint-keys: map-keys($breakpoints)) {
   $n: index($breakpoint-keys, $name);
 
