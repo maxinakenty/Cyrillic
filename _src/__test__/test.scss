@@ -1,0 +1,65 @@
+@import '../_styles/base/vars/vars';
+@import '../_styles/helpers/functions/functions';
+
+// TRUE
+@import '../../node_modules/sass-true/sass/true';
+
+@include test-module('Get breakpoint function') {
+
+  // Testing Functions
+  @include test('get-breakpoint [function]') {
+    $key: xs;
+
+    $test: get-breakpoint( $key );
+    $expect: 0;
+    @include assert-equal($test, $expect,
+      'Returns the first value from the $breakpoints map');
+  }
+
+  @include test('get-breakpoint [function]') {
+    $key: sm;
+
+    $test: get-breakpoint( $key );
+    $expect: 640;
+    @include assert-equal($test, $expect,
+      'Returns the second value from the $breakpoints map');
+  }
+
+  @include test('get-breakpoint [function]') {
+    $key: md;
+
+    $test: get-breakpoint( $key );
+    $expect: 800;
+    @include assert-equal($test, $expect,
+      'Returns the third value from the $breakpoints map');
+  }
+
+  @include test('get-breakpoint [function]') {
+    $key: lg;
+
+    $test: get-breakpoint( $key );
+    $expect: 1200;
+    @include assert-equal($test, $expect,
+      'Returns the fourth value from the $breakpoints map');
+  }
+
+  @include test('get-breakpoint [function]') {
+    $key: xl;
+
+    $test: get-breakpoint( $key );
+    $expect: 1600;
+    @include assert-equal($test, $expect,
+      'Returns the fifth value from the $breakpoints map');
+  }
+
+  @include test('get-breakpoint [function]') {
+    $key: xxl;
+
+    $test: get-breakpoint( $key );
+    $expect: null;
+    @include assert-equal($test, $expect,
+      'Returns null if there are no values in the $breakpoints map');
+  }
+}
+
+@include report;
