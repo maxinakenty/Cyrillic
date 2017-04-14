@@ -64,6 +64,7 @@
     "styles": "./_src/**/*.scss",
     "scripts": "./_src/pages/**/*.js",
     "svg": "./_src/assets/img/**/.svg",
-    "png": "./_src/assets/img/**/.png"
+    "png": "./_src/assets/img/**/.png",
+    "test": "./_src/__test__/**"
   }
 }
