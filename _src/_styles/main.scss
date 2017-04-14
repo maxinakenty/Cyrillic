@@ -1,22 +1,18 @@
-//  BASE
-// @import '.';
+// VENDOR
 @import 'math';
 @import 'scale';
-@import './base/vars/vars';
 
-// HELPERS
-// @import './helpers/functions/functions';
-// @import './helpers/mixins/mixins';
+@import './cyrillic/settings';
+@import './cyrillic/helpers/all';
 
-// VENDOR
 
 @import './base/reset';
-// @import './base/global';
-// @import './base/typography';
+@import './base/global';
+@import './base/typography';
 
 
 // LAYOUT
-// @import '../templates/layout';
+@import '../templates/layout';
 
 // PAGES
-// @import '../pages/index/index';
+@import '../pages/index/index';
