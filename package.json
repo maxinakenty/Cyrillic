@@ -13,6 +13,7 @@
   "author": "maxinakenty <mgreen097@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "accoutrement-scale": "^3.0.0",
     "autoprefixer": "^6.5.1",
     "babel-core": "^6.18.0",
     "babel-loader": "^6.2.7",
@@ -48,6 +49,7 @@
     "gulp.spritesmith": "^6.2.1",
     "gulplog": "^1.0.0",
     "imagemin-pngquant": "^5.0.0",
+    "mathsass": "^0.9.5",
     "node-notifier": "^4.6.1",
     "normalize.css": "^5.0.0",
     "path": "^0.12.7",
