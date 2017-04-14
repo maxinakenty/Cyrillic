@@ -1,14 +1,18 @@
 'use strict';
 
 var gulp = require('gulp');
+var __paths = require('../paths.config');
 var $ = require('gulp-load-plugins')();
+var combine = require('stream-combiner2').obj;
 
 gulp.task('mocha', function() {
-  return gulp.src(['__test__/*.scss'], {
+  return combine(
+    gulp.src(__paths.src.mocha, {
       read: false
-    })
-    .pipe($.mocha({
+    }),
+    $.mocha({
       reporter: 'list'
-    }))
-    .on('error', $.gutil.log);
+    })
+  ).on('error', $.notify.onError());
+
 });
