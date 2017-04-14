@@ -1,5 +1,0 @@
-@function calc-font-size($font-val, $root-size-val) {
-  $font-size: #{$font-val / $root-size-val}rem;
-
-  @return $font-size;
-}

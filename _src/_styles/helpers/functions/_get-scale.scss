@@ -1,8 +1,0 @@
-@function get-scale($key) {
-  @if map-has-key($modular-scale, $key) {
-    @return map-get($modular-scale, $key);
-  }
-
-  @warn "#{$key} is not a set $modular-scale variable";
-  @return null;
-}

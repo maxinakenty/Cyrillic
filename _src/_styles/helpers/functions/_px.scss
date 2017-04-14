@@ -1,5 +1,0 @@
-@function px($val) {
-  $result: #{$val + 'px'};
-
-  @return $result;
-}

@@ -1,8 +1,0 @@
-@function line-height($key) {
-  @if map-has-key($line-heights, $key) {
-    @return map-get($line-heights, $key);
-  }
-
-  @warn "#{$key} is not a set $line-heights variable";
-  @return null;
-}
