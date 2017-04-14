@@ -28,7 +28,8 @@
     "assets": "./_src/assets/**",
     "imagemin": "./_src/assets/img/**",
     "spriteSvg": "./_src/assets/img/**/*.svg",
-    "spritePng": "./_src/assets/img/**/*.png"
+    "spritePng": "./_src/assets/img/**/*.png",
+    "mocha": "./_src/__test__/*.js"
   },
 
   "dist": {
