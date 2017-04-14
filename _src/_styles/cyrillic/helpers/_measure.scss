@@ -1,0 +1,77 @@
+// MEASURE
+@mixin measure($name) {
+  @if $name != all {
+    $measure: map-deep-get($cyrillic, measures, $name);
+
+    @if $measure {
+      max-width: to-rem($measure);
+
+    } @else {
+      @warn "#{$name} is not valid to use as a measure ";
+    }
+  } @else if $name == all {
+    $measure: map-deep-get($cyrillic, measures, xs);
+
+    @for $i from 2 through $breakpoints_length {
+      $breakpoint: nth($breakpoints_values, $i);
+
+      @include up($breakpoint) {
+        $measure: nth($measures_values, $i);
+        max-width: to-rem($measure);
+      }
+    }
+  }
+}
+
+// INDEAL MEASURE
+@mixin ideal-measure($breakpoint: xs, $padding: 1, $main: true, $output: max-width) {
+  // глобальная переменная $line_heights объявлена в cyrillic-config 155 строка
+  $is_in_line_heights: map-has-key($line_heights, $breakpoint);
+
+  @if $is_in_line_heights {
+    $line_height: map-get($line_heights, $breakpoint);
+    $font_base: map-deep-get($modular_scale, $breakpoint, zeta);
+    $module: round($font_base * $line_height);
+    $gutter: $module * $padding;
+
+    $ideal_measure: map-get($measures, $breakpoint);
+    $container_width: map-get($max_widths, $breakpoint);
+    $percentage: percentage(($ideal_measure + $gutter) / $container_width);
+
+    @if $percentage < 55 {
+        $percentage: 55%;
+      } @else if $percentage > 65 {
+        $percentage: 65%;
+      }
+
+      @if $main == false {
+        $percentage: 100 - $percentage;
+      }
+
+    #{$output}: $percentage;
+
+
+  } @else {
+    $line_height: nth($line_heights_values, $line_heights_length);
+    $scale_key: nth($scale_keys, $line_heights_length);
+    $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
+    $module: round($font-base * $line-height);
+    $gutter: $module * $padding;
+
+    $ideal_measure: map-get($measures, $breakpoint);
+    $container_width: map-get($max_widths, $breakpoint);
+    $percentage: percentage(($ideal_measure + $gutter) / $container_width);
+
+    @if $percentage < 55 {
+        $percentage: 55%;
+      } @else if $percentage > 65 {
+        $percentage: 65%;
+      }
+
+      @if $main == false {
+        $percentage: 100 - $percentage;
+      }
+
+    #{$output}: $percentage;
+  }
+}

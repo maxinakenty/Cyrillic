@@ -1,0 +1,6 @@
+@mixin col($val, $float: left) {
+  position: relative;
+  min-height: 1px;
+  width: 100% / ($grid-columns-count / $val);
+  float: $float;
+}

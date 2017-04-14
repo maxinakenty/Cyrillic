@@ -1,0 +1,35 @@
+// HEIGHT
+@mixin height($number: 1) {
+  @for $i from 1 through $breakpoints_length {
+    $breakpoint_key: nth($breakpoints_keys, $i);
+
+    @include up($breakpoint_key) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line_heights_length {
+        $line_height: nth($line_heights_values, $line_heights_length);
+
+        // если $breakpoints меньше или равно $modular_scale_lenght
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round($font_base * $line_height);
+
+          $result: $number * $module;
+
+          height: rem($result);
+        }
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+        $line_height: nth($line_heights_values, $i);
+        $scale_key: nth($scale_keys, $i);
+        $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+        $module: round($font_base * $line_height);
+
+        $result: $number * $module;
+
+        height: rem($result);
+      }
+    }
+  }
+}

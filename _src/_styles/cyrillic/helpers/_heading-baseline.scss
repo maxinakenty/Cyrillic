@@ -1,0 +1,9 @@
+@mixin heading-baseline($heading) {
+  $line_height: map-deep-get($cyrillic, headings, $heading, line_height);
+  $margin_top: map-deep-get($cyrillic, headings, $heading, margin_top);
+  $margin_bottom: map-deep-get($cyrillic, headings, $heading, margin_bottom);
+
+  @include line-height($line-height);
+  @include margin-top($margin_top);
+  @include margin-bottom($margin-bottom);
+}
