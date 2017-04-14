@@ -25,7 +25,7 @@
 }
 
 
-$font-root: 100 !default;
+$global-font-size: 100% !default;
 
 /// Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 ///
@@ -42,13 +42,13 @@ $font-root: 100 !default;
 /// @param {Number} $base [null] - The base value to use when calculating the `rem`. If you're using Foundation out of the box, this is 16px. If this parameter is `null`, the function will reference the `$base-font-size` variable as the base.
 ///
 /// @returns {List} A list of converted values.
-@function to-rem($values, $base: null) {
+@function rem($values, $base: null) {
   $rem-values: ();
   $count: length($values);
 
   // If no base is defined, defer to the global font size
   @if $base == null {
-    $base: $font-root;
+    $base: $global-font-size;
   }
 
   // If the base font size is a %, then multiply it by 16px
@@ -77,14 +77,14 @@ $font-root: 100 !default;
 @function convert-to-em($value) {
   // Pixel and unitless values are converted to rems
   @if unit($value) == 'px' or unitless($value) {
-    $value: to-rem($value, $base: 16px);
+    $value: rem($value, $base: 16px);
   }
 
   // Then the value is converted to ems
   @return strip-unit($value) * 1em;
 }
 
-/// Converts a pixel value to matching rem value. *Any* value passed, regardless of unit, is assumed to be a pixel value. By default, the base pixel value used to calculate the rem value is taken from the `$font-root` variable.
+/// Converts a pixel value to matching rem value. *Any* value passed, regardless of unit, is assumed to be a pixel value. By default, the base pixel value used to calculate the rem value is taken from the `$global-font-size` variable.
 /// @access private
 ///
 /// @param {Number} $value - Pixel value to convert.
@@ -119,14 +119,14 @@ $font-root: 100 !default;
 /// Converts a pixel, percentage, rem or em value to a unitless value based on a given font size. Ideal for working out unitless line heights.
 ///
 /// @param {Number} $value - Value to convert to a unitless line height
-/// @param {Number} $base - The font size to use to work out the line height - defaults to $font-root
+/// @param {Number} $base - The font size to use to work out the line height - defaults to $global-font-size
 ///
 /// @return {Number} - Unitless number
 @function unitless-calc($value, $base: null) {
 
   // If no base is defined, defer to the global font size
   @if $base == null {
-    $base: $font-root;
+    $base: $global-font-size;
   }
 
   // First, lets convert our $base to pixels
