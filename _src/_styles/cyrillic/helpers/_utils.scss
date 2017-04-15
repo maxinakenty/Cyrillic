@@ -1,3 +1,24 @@
+@function round-to-even($value) {
+  $result: 2 * round($value / 2);
+
+  @return $result;
+}
+
+
+// Получаем значение в виде числа или возвращаем стоку (например auto, inheright or initial)
+@function rem-or-not($value, $module) {
+  $typeof_value: type-of($value);
+
+  @if $typeof_value == string {
+    @return $value;
+
+  } @else if $typeof_value == number {
+    @return rem($value * $module);
+
+  } @else {
+    @warn "typeof value must be a string or number";
+  }
+}
 
 
 // GET LINE HEIGHT
