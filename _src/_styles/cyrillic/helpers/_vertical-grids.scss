@@ -12,7 +12,7 @@
 @mixin grid() {
   $line_height: line-height(xs);
   $font_base: map-deep-get($modular_scale, xs, zeta);
-  $module: round($font_base * $line_height);
+  $module: round-to-even($font_base * $line_height);
 
   background-image: linear-gradient(to bottom, $grid_line_bg 1px, transparent 0);
   background-position: left top;
@@ -31,7 +31,7 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           background-size: 100% rem($module);
         }
@@ -40,7 +40,7 @@
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($scale_keys, $i);
         $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
+        $module: round-to-even($font_base * $line_height);
 
         background-size: 100% rem($module);
       }
@@ -51,7 +51,7 @@
 @mixin double-grid() {
   $line_height: line-height(xs);
   $font_base: map-deep-get($modular_scale, xs, zeta);
-  $module: round($font_base * $line_height);
+  $module: round-to-even($font_base * $line_height);
 
 
   @include double-grid-gradient($module, $grid_line_bg);
@@ -71,7 +71,7 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           @include double-grid-gradient($module, $grid_line_bg);
           background-size: 100% rem($module);
@@ -81,7 +81,7 @@
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($scale-keys, $i);
         $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
+        $module: round-to-even($font_base * $line_height);
 
         @include double-grid-gradient($module, $grid_line_bg);
 
