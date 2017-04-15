@@ -1,95 +1,92 @@
 // PADDING TOP
 @mixin padding-top($number: 1) {
   @for $i from 1 through $breakpoints_length {
-    $point: nth($breakpoints_keys, $i);
+    $breakpoint_key: nth($breakpoints_keys, $i);
 
-    @include up($point) {
-      // if breakpoints-length > line-heights-length
-      @if $i > $line-heights_length {
+    @include up($breakpoint_key) {
+
+      // если значений $line-height меньше, чем значений $breakpoints
+      @if $i > $line_heights_length {
         $line_height: nth($line_heights_values, $line_heights_length);
-        $scale_key: nth($breakpoints_keys, $line_heights_length);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
-        $result: $number * $module;
 
-        padding-top: to-rem($result);
+        // если $breakpoints меньше или равно $modular_scale_lenght
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round-to-even($font_base * $line_height);
 
-      // if breakpoints-length < line-heights-length
-      }@else {
-        $line_height: nth($line_heights_values, $i);
-        $scale_key: nth($breakpoints_keys, $i);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
-        $result: $number * $module;
+          $result: $number * $module;
 
-        padding-top: to-rem($result);
+          padding-top: rem($result);
+        }
+      // если значений $line-height и $breakpoints одинаковое количество
+      } @else {
+          $line_height: nth($line_heights_values, $i);
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round-to-even($font_base * line_height);
+
+          $result: $number * $module;
+
+          padding-top: rem($result);
       }
     }
   }
 }
 
 
-// PADDING
+
 @mixin padding($top, $right: null, $bottom: null, $left: null) {
   @for $i from 1 through $breakpoints_length {
-    $point: nth($breakpoints_keys, $i);
+    $breakpoint_key: nth($breakpoints_keys, $i);
 
-    @include up($point) {
+    @include up($breakpoint_key) {
 
-      // if breakpoints-length > line-heights-length
+      // если значений $line-height меньше, чем значений $breakpoints
       @if $i > $line_heights_length {
-        $line_height: nth($line-heights_values, $line_heights_length);
-        $scale_key: nth($scale_keys, $line-heights_length);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $module: round($font-base * $line_height);
-        $module_top: $top * $module;
+        $line_height: nth($line_heights_values, $line_heights_length);
 
-        @if $right == null and $bottom == null and $left == null {
-          padding: to-rem($module_top);
+        // если $breakpoints меньше или равно $modular_scale_lenght
+        @if $i <= $scale_length {
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round-to-even($font_base * $line_height);
 
-        } @else if $left == null and $bottom == null {
-          $module_right: $right * $module;
-          padding: to-rem($module_top $module_right);
+          @if $right == null and $bottom == null and $left == null {
+           padding: rem-or-not($top, $module);
 
-        } @else if $left == null or $left == $right {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          padding: to-rem($module_top $module_right $module_bottom);
+          } @else if $left == null and $bottom == null {
+             padding: rem-or-not($top, $module) rem-or-not($right, $module);
 
-        } @else {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          $module_left: $left * $module;
-          padding: to-rem($module_top $module_right $module_bottom $module_left);
+          } @else if $left == null or $left == $right {
+             padding: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module);
+
+          } @else {
+             padding: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module) rem-or-not($left, $module);
+          }
         }
-
-      // if breakpoints-length < line-heights-length
+      // если значений $line-height и $breakpoints одинаковое количество
       } @else {
-        $line_height: nth($line_heights_values, $i);
-        $scale_key: nth($breakpoints_keys, $i);
-        $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
-        $module_top: $top * $module;
+          $line_height: nth($line_heights_values, $i);
+          $scale_key: nth($scale_keys, $i);
+          $font_base: map-deep-get($modular_scale, $scale_key, zeta);
+          $module: round-to-even($font_base * $line_height);
 
         @if $right == null and $bottom == null and $left == null {
-          padding: to-rem($module_top);
+         padding: rem-or-not($top, $module);
 
         } @else if $left == null and $bottom == null {
-          $module_right: $right * $module;
-          padding: to-rem($module_top $module_right);
+           padding: rem-or-not($top, $module) rem-or-not($right, $module);
 
         } @else if $left == null or $left == $right {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          padding: to-rem($module_top $module_right $module_bottom);
+           padding: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module);
 
         } @else {
-          $module_right: $right * $module;
-          $module_bottom: $bottom * $module;
-          $module_left: $left * $module;
-          padding: to-rem($module_top $module_right $module_bottom $module_left);
+           padding: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module) rem-or-not($right, $module);
         }
       }
     }
   }
 }
+
+
