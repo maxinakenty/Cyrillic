@@ -1,17 +1,17 @@
 // MAX WIDTH
 @mixin max-width($name) {
   @if $name != all {
-    $max_width: map-deep-get($cyrillic, max_widths, $name);
+    $max_width: map-deep-get($max_widths, $name);
 
     @if $max_width {
-      max-width: to-rem($max_width);
+      max-width: rem($max_width);
 
     } @else {
         @warn "#{$name} is not valid to use as a maxwidth";
     }
   } @else if $name == all {
       $max_width: map-deep-get($cyrillic, max_widths, xs);
-      max-width: to-rem($max_width);
+      max-width: rem($max_width);
 
       @for $i from 2 through $breakpoints_length {
         $breakpoint: nth($breakpoints_values, $i);
