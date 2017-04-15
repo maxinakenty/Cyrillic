@@ -1,3 +1,4 @@
+
 // MARGIN TOP
 @mixin margin-top($number: 1) {
   @for $i from 1 through $breakpoints_length {
@@ -13,7 +14,7 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           $result: $number * $module;
 
@@ -24,7 +25,7 @@
           $line_height: nth($line_heights_values, $i);
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           $result: $number * $module;
 
@@ -50,7 +51,7 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           $result: $number * $module;
 
@@ -61,28 +62,13 @@
           $line_height: nth($line_heights_values, $i);
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           $result: $number * $module;
 
           margin-bottom: rem($result);
       }
     }
-  }
-}
-
-// Получаем значение в виде числа или возвращаем стоку (например auto, inheright or initial)
-@function rem-or-not($value, $module) {
-  $typeof_value: type-of($value);
-
-  @if $typeof_value == string {
-    @return $value;
-
-  } @else if $typeof_value == number {
-    @return rem($value * $module);
-
-  } @else {
-    @warn "typeof value must be a string or number";
   }
 }
 
@@ -103,19 +89,19 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
           @if $right == null and $bottom == null and $left == null {
             margin: rem-or-not($top, $module);
 
           } @else if $left == null and $bottom == null {
-              margin: rem-or-not($top) rem-or-not($right);
+              margin: rem-or-not($top, $module) rem-or-not($right, $module);
 
           } @else if $left == null or $left == $right {
-              margin: rem-or-not($top) rem-or-not($right) rem-or-not($top);
+              margin: rem-or-not($top, $module) rem-or-not($right, module) rem-or-not($top, module);
 
           } @else {
-              margin: rem-or-not($top) rem-or-not($right) rem-or-not($top) rem-or-not($left);
+              margin: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module) rem-or-not($left, $module);
           }
         }
       // если значений $line-height и $breakpoints одинаковое количество
@@ -123,21 +109,23 @@
           $line_height: nth($line_heights_values, $i);
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
 
         @if $right == null and $bottom == null and $left == null {
           margin: rem-or-not($top, $module);
 
         } @else if $left == null and $bottom == null {
-            margin: rem-or-not($top) rem-or-not($right);
+            margin: rem-or-not($top, $module) rem-or-not($right, $module);
 
         } @else if $left == null or $left == $right {
-            margin: rem-or-not($top) rem-or-not($right) rem-or-not($top);
+            margin: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module);
 
         } @else {
-            margin: rem-or-not($top) rem-or-not($right) rem-or-not($top) rem-or-not($right);
+            margin: rem-or-not($top, $module) rem-or-not($right, $module) rem-or-not($top, $module) rem-or-not($right, $module);
         }
       }
     }
   }
 }
+
+
