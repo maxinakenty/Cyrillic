@@ -1,0 +1,26 @@
+.block {
+  // @include size(3);
+  background-color: gray;
+  @include margin(1, inherit);
+}
+
+.block_wrap {
+  display: flex;
+  border: 1px solid black;
+}
+
+
+
+.major {
+  text-transform: uppercase;
+  position: relative;
+  letter-spacing: -0.015em;
+
+  span {
+    display: block;
+  }
+
+  @include up(sm) {
+    width: 140%;
+  }
+}
