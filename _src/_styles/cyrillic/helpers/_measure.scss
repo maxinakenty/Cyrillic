@@ -4,7 +4,7 @@
     $measure: map-deep-get($cyrillic, measures, $name);
 
     @if $measure {
-      max-width: to-rem($measure);
+      max-width: rem($measure);
 
     } @else {
       @warn "#{$name} is not valid to use as a measure ";
@@ -17,7 +17,7 @@
 
       @include up($breakpoint) {
         $measure: nth($measures_values, $i);
-        max-width: to-rem($measure);
+        max-width: rem($measure);
       }
     }
   }
@@ -31,7 +31,7 @@
   @if $is_in_line_heights {
     $line_height: map-get($line_heights, $breakpoint);
     $font_base: map-deep-get($modular_scale, $breakpoint, zeta);
-    $module: round($font_base * $line_height);
+    $module: round-to-even($font_base * $line_height);
     $gutter: $module * $padding;
 
     $ideal_measure: map-get($measures, $breakpoint);
@@ -55,7 +55,7 @@
     $line_height: nth($line_heights_values, $line_heights_length);
     $scale_key: nth($scale_keys, $line_heights_length);
     $font_base: map-deep-get($cyrillic, modular_scale, $scale_key, zeta);
-    $module: round($font-base * $line-height);
+    $module: round-to-even($font-base * $line-height);
     $gutter: $module * $padding;
 
     $ideal_measure: map-get($measures, $breakpoint);
