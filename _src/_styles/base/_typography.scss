@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  @include font_size(zeta);
+  @include font-size(zeta);
   @include line_height();
   font-style: normal;
   font-weight: 400;
@@ -26,7 +26,7 @@ h6 {
 }
 
 h1 {
-  @include font_size(alpha);
+  @include font-size(alpha);
   @include heading-baseline(h1);
   @include line-height(1.5);
 
@@ -44,29 +44,28 @@ h1 {
 }
 
 h2 {
-  @include font_size(beta);
+  @include font-size(beta);
   @include heading-baseline(h2);
 },
 
 h3 {
-  @include font_size(gamma);
+  @include font-size(gamma);
   @include heading-baseline(h3);
 }
 
 h4 {
-  @include font_size(delta);
+  @include font-size(delta);
   @include heading-baseline(h4);
 }
 
 h5 {
-  @include font_size(epsilon);
+  @include font-size(epsilon);
   @include heading-baseline(h5);
 }
 
 h6 {
-  @include font_size(zeta);
+  @include font-size(zeta);
   @include heading-baseline(h6);
-  // font-style: italic;
 }
 
 p,
@@ -81,6 +80,7 @@ blockquote {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: italic;
+
   @include padding(0, 0, 0, 1);
 
   @include up(md) {
