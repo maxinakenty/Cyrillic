@@ -12,7 +12,7 @@
         @if $i <= $scale_length {
           $scale_key: nth($scale_keys, $i);
           $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-          $module: round($font_base * $line_height);
+          $module: round-to-even($font_base * $line_height);
           $result: $number * $module;
 
           line-height: rem($result);
@@ -22,7 +22,7 @@
         $line_height: nth($line_heights_values, $i);
         $scale_key: nth($scale_keys, $i);
         $font_base: map-deep-get($modular_scale, $scale_key, zeta);
-        $module: round($font_base * $line_height);
+        $module: round-to-even($font_base * $line_height);
         $result: $number * $module;
 
         line-height: rem($result);
