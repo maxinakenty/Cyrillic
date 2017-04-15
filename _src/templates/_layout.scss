@@ -8,6 +8,7 @@ body {
 .wrap {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .content {
@@ -128,8 +129,6 @@ body {
   @extend %column;
   @include up(sm) {
     @include ideal-measure(sm, 1, false);
-
-    // padding-right: get-gutter-width(md);
   }
 
   @include up(md) {
@@ -138,8 +137,6 @@ body {
 
   @include up(lg) {
     @include ideal-measure(lg, 1, false);
-
-    // padding-right: get-gutter-width(lg);
   }
 
   @include up(xl) {
@@ -176,7 +173,6 @@ body {
 // The sidenotes will move out the column into the sidebar position aligned to the baseline.
 .column--right {
   @include up(sm) {
-    // @include ideal-measure(sm);
     @include ideal-measure(sm, 0.5, false, margin-left);
   }
 
@@ -219,24 +215,12 @@ body {
 
     @include up(sm) {
       position: absolute;
-      @include ideal-measure(sm, 1, false);
       @include ideal-measure(sm, 1, true, left);
       @include padding(0, 1);
     }
 
-    @include up(md) {
-      @include ideal-measure(md, 1, false);
-      @include ideal-measure(md, 1, true, left);
-    }
-
     @include up(lg) {
-      @include ideal-measure(lg, 2.5, false);
       @include ideal-measure(lg, 2.5, true, left);
-    }
-
-    @include up(xl) {
-      @include ideal-measure(xl, 2.5, false);
-      @include ideal-measure(xl, 2.5, true, left);
     }
   }
 }
