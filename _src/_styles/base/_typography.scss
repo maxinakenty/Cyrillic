@@ -73,13 +73,13 @@ ul,
 ol,
 blockquote {
   @include margin-bottom(1);
-  font-size: 95%;
 }
 
 blockquote {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: italic;
+  font-size: 95%;
 
   @include padding(0, 0, 0, 1);
 
